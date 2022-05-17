@@ -17,7 +17,7 @@ const sync = require("browser-sync").create();
 //HTML-min минификация html файлов и перенос вв папку build
 
 const html = () => {
-  return gulp.src("source/*.html")
+  return gulp.src("src/*.html")
     .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(gulp.dest("build"))
 }
@@ -27,7 +27,7 @@ exports.html = html;
 //Script min
 
 const script = () => {
-  return gulp.src("source/js/main.js")
+  return gulp.src("src/js/main.js")
     .pipe(uglify())
     .pipe(rename("main.min.js"))
     .pipe(gulp.dest("build/js"))
@@ -38,7 +38,7 @@ exports.script = script;
 //CSS
 
 const styles = () => {
-  return gulp.src("source/less/style.less") //место где берем файлы
+  return gulp.src("src/less/style.less") //место где берем файлы
     .pipe(plumber()) //отловщик ошибок
     .pipe(sourcemap.init()) // делает слепок текущего состояния
     .pipe(less()) // превращает лесс в цсс
@@ -57,7 +57,7 @@ exports.styles = styles; //нужно для доступности таска �
 //Images оптимизирует картинки
 
 const images = () => {
-  return gulp.src("source/img/**/*.{png,jpg,svg}")
+  return gulp.src("src/img/**/*.{png,jpg,svg}")
     .pipe(imagemin([
       imagemin.mozjpeg({ progressive: true }), //для картинок img
       imagemin.optipng({ optimizationLevel: 3 }),
@@ -71,7 +71,7 @@ exports.images = images;
 //Webp
 
 const createwebp = () => {
-  return gulp.src("source/img/**/*.{png,jpg}")
+  return gulp.src("src/img/**/*.{png,jpg}")
     .pipe(webp({ quality: 90 }))
     .pipe(gulp.dest("build/img"))
 }
@@ -81,7 +81,7 @@ exports.createwebp = createwebp;
 //Sprite
 
 const sprite = () => {
-  return gulp.src("source/img/icons/*.svg")
+  return gulp.src("src/img/icons/*.svg")
     .pipe(svgstore())
     .pipe(rename("sprite.svg"))
     .pipe(gulp.dest("build/img"))
@@ -93,11 +93,11 @@ exports.sprite = sprite;
 
 const copy = (done) => {
   gulp.src([
-    "source/fonts/*.{woff,woff2,ttf}",
-    "source/*.ico",
-    "source/img/**/*.{jpg,png,svg}",
+    "src/fonts/*.{woff,woff2,ttf}",
+    "src/*.ico",
+    "src/img/**/*.{jpg,png,svg}",
   ], {
-    base: "source"
+    base: "src"
   })
     .pipe(gulp.dest("build"))
   done();
@@ -108,9 +108,9 @@ exports.copy = copy;
 //Copy pages
 
 const copages = (done) => {
-  gulp.src("source/**/*.*",
+  gulp.src("src/**/*.*",
     {
-      base: "source"
+      base: "src"
     })
     .pipe(gulp.dest("."))
   done();
@@ -149,9 +149,9 @@ const reload = done => {
 //Wathcher
 
 const watcher = () => {
-  gulp.watch("source/less/**/*.less", gulp.series(styles, reload));
-  gulp.watch("source/js/main.js", gulp.series(script, reload));
-  gulp.watch("source/*.html", gulp.series(html, reload));
+  gulp.watch("src/less/**/*.less", gulp.series(styles, reload));
+  gulp.watch("src/js/main.js", gulp.series(script, reload));
+  gulp.watch("src/*.html", gulp.series(html, reload));
 }
 
 //Перенос для Pages в GitHab
