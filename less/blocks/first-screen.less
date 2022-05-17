@@ -1,0 +1,57 @@
+.first-screen {
+  background-image: url("../img/bg-start.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 550px;
+  position: relative;
+
+  &__intro {
+    position: absolute;
+    z-index: 11;
+    top: 25%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    text-align: center;
+  }
+
+  &__title {
+    font-family: Ubuntu, sans-serif;
+    line-height: 1.2;
+    font-weight: 700;
+    font-size: 24px;
+    text-transform: uppercase;
+    margin: 0 0 20px 0;
+  }
+
+  &__text {
+    font-family: Droid, sans-serif;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.5;
+    opacity: 0.7;
+    margin: 0 0 24px 0;
+  }
+
+  &__btn {
+    background-color: @light-blue;
+    text-decoration: none;
+    color: @basic-white;
+    font-family: Ubuntu, sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+    transition: all 0.3s;
+    display: inline-block;
+    text-transform: uppercase;
+    padding: 16px 32px;
+    box-sizing: border-box;
+    border-radius: 100px;
+
+    &:hover, &:focus &:active {
+      background-color: @basic-blue;
+    }
+  }
+}
